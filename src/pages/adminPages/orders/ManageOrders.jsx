@@ -19,13 +19,39 @@ export default function ManageOrders() {
           order_items(
             *,
             products(name, image_url)
-          ),
-          profiles(email)
+          )
         `)
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      setOrders(data || []);
+      
+      // Fetch user emails separately
+      if (data && data.length > 0) {
+        const userIds = [...new Set(data.map(order => order.user_id).filter(Boolean))];
+        const { data: profiles, error: profilesError } = await supabase
+          .from("profiles")
+          .select("id, email")
+          .in("id", userIds);
+
+        if (!profilesError && profiles) {
+          // Map emails to orders
+          const emailMap = {};
+          profiles.forEach(profile => {
+            emailMap[profile.id] = profile.email;
+          });
+
+          const ordersWithEmails = data.map(order => ({
+            ...order,
+            user_email: emailMap[order.user_id] || "N/A"
+          }));
+
+          setOrders(ordersWithEmails);
+        } else {
+          setOrders(data || []);
+        }
+      } else {
+        setOrders(data || []);
+      }
     } catch (err) {
       setError(err.message);
     } finally {
@@ -76,7 +102,7 @@ export default function ManageOrders() {
                 <div>
                   <h3 className="text-xl font-bold mb-1">Order #{order.id}</h3>
                   <p className="text-sm text-gray-600">
-                    Customer: {order.profiles?.email || "N/A"}
+                    Customer: {order.user_email || "N/A"}
                   </p>
                   <p className="text-sm text-gray-600">
                     Date:{" "}

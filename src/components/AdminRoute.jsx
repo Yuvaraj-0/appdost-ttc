@@ -50,15 +50,7 @@ export default function AdminRoute({ children }) {
   }
 
   if (!isAdmin) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-red-600 mb-4">Access Denied</h2>
-          <p className="text-gray-600 mb-4">You don't have admin privileges.</p>
-          <Navigate to="/dashboard" replace />
-        </div>
-      </div>
-    );
+    return <Navigate to="/" replace />;
   }
 
   return <>{children}</>;

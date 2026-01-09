@@ -64,20 +64,30 @@ const Signin = () => {
     if (profile.role === "admin") {
       navigate("/admindashboard", { replace: true });
     } else {
-      navigate("/dashboard", { replace: true });
+      navigate("/", { replace: true });
     }
     setLoading(false);
   };
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4">
-      <div className="max-w-md w-full">
-        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+    <div className="min-h-screen relative flex items-center justify-center py-12 px-4">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1920&h=1080&fit=crop"
+          alt="Shopping Background"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gray-900/80 backdrop-blur-sm"></div>
+      </div>
+
+      <div className="max-w-md w-full relative z-10">
+        <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-gray-200">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-indigo-700 px-8 py-10 text-white text-center">
+          <div className="bg-gradient-to-r from-gray-800 to-gray-900 px-8 py-10 text-white text-center">
             <HiLogin className="mx-auto text-6xl mb-4" />
-            <h2 className="text-3xl font-bold mb-2">Welcome Back</h2>
-            <p className="text-blue-100">Sign in to continue to your account</p>
+            <h2 className="text-3xl font-bold mb-2">Welcome to E-Shop</h2>
+            <p className="text-gray-300">Sign in to continue shopping</p>
           </div>
 
           {/* Form */}
@@ -94,7 +104,7 @@ const Signin = () => {
                   </div>
                   <input
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors"
+                    className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-gray-900 focus:ring-2 focus:ring-gray-900/20 focus:outline-none transition-all"
                     type="email"
                     name="email"
                     id="email"
@@ -115,7 +125,7 @@ const Signin = () => {
                   </div>
                   <input
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-12 pr-12 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors"
+                    className="w-full pl-12 pr-12 py-3 border-2 border-gray-200 rounded-xl focus:border-gray-900 focus:ring-2 focus:ring-gray-900/20 focus:outline-none transition-all"
                     type={showPassword ? "text" : "password"}
                     name="password"
                     id="password"
@@ -143,7 +153,7 @@ const Signin = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-3 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-indigo-800 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gray-900 text-white py-3 rounded-xl font-bold text-lg hover:bg-gray-800 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? "Signing in..." : "Sign In"}
               </button>
@@ -172,7 +182,7 @@ const Signin = () => {
             {/* Sign Up Link */}
             <p className="mt-8 text-center text-gray-600">
               Don't have an account?{" "}
-              <Link to="/signup" className="text-blue-600 font-bold hover:text-blue-700 hover:underline">
+              <Link to="/signup" className="text-gray-900 font-bold hover:text-gray-700 hover:underline">
                 Sign up
               </Link>
             </p>

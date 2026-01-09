@@ -57,13 +57,17 @@ export default function Checkout() {
 
   const createOrder = async (paymentStatus = "pending", transactionId = null) => {
     try {
+      const cartTotal = getCartTotal();
+      console.log('Creating order with cart total:', cartTotal);
+      console.log('Cart items:', cartItems);
+      
       // Save order to database
       const { data: order, error: orderError } = await supabase
         .from("orders")
         .insert([
           {
             user_id: session.user.id,
-            total_amount: getCartTotal(),
+            total_amount: cartTotal,
             payment_method: paymentMethod,
             payment_status: paymentStatus,
             transaction_id: transactionId,
@@ -272,10 +276,11 @@ export default function Checkout() {
           </div>
 
           {/* Right: Order Summary & Payment */}
-          <div className="lg:col-span-1 space-y-6">
-            {/* Order Summary */}
-            <div className="bg-white shadow-lg rounded-2xl p-6 sticky top-24">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Order Summary</h3>
+          <div className="lg:col-span-1">
+            <div className="sticky top-8 space-y-6">
+              {/* Order Summary */}
+              <div className="bg-white shadow-lg rounded-2xl p-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Order Summary</h3>
 
               <div className="space-y-4 mb-6">
                 {cartItems.map((item) => (
@@ -310,10 +315,10 @@ export default function Checkout() {
                   <span className="text-blue-600">₹{getCartTotal().toFixed(2)}</span>
                 </div>
               </div>
-            </div>
+              </div>
 
-            {/* Payment Method */}
-            <div className="bg-white shadow-lg rounded-2xl p-6">
+              {/* Payment Method */}
+              <div className="bg-white shadow-lg rounded-2xl p-6">
               <div className="flex items-center gap-3 mb-6">
                 <HiCreditCard className="text-3xl text-blue-600" />
                 <h3 className="text-2xl font-bold text-gray-900">Payment Method</h3>
@@ -392,6 +397,7 @@ export default function Checkout() {
                   <span>Place Order (Cash on Delivery)</span>
                 </button>
               )}
+              </div>
             </div>
           </div>
         </div>

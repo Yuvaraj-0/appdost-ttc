@@ -74,6 +74,9 @@ export const AuthContextProvider = ({ children }) => {
     const { error } = await supabase.auth.signOut();
     if (error) {
       console.error("Error signing out:", error);
+    } else {
+      // Redirect to signin page after logout
+      window.location.href = '/signin';
     }
   }
 
