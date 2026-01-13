@@ -1,53 +1,41 @@
-import { createBrowserRouter } from 'react-router-dom';
-import Layout from './layout/Layout';
-import ProtectedRoute from './components/ProtectedRoute';
-import Home from './pages/Home';
-import ProductList from './pages/ProductList';
-import ProductDetail from './pages/ProductDetail';
-import Cart from './pages/Cart';
-import Checkout from './pages/Checkout';
-import Orders from './pages/Orders';
+import { createBrowserRouter } from "react-router-dom";
+import App from "./App";
+import Home from "./pages/Home";
+import ProductList from "./pages/ProductList";
+import ProductDetail from "./pages/ProductDetail";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import Order from "./pages/Order";
+import PrivateRoute from "./components/PrivateRoute";
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <Layout />,
+    path: "/",
+    element: <App />,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <Home />,
       },
       {
-        path: '/products',
+        path: "/productlist",
         element: <ProductList />,
       },
       {
-        path: '/product/:id',
+        path: "/product/:id",
         element: <ProductDetail />,
       },
       {
-        path: '/cart',
-        element: (
-          <ProtectedRoute>
-            <Cart />
-          </ProtectedRoute>
-        ),
+        path: "/cart",
+        element: <PrivateRoute><Cart /></PrivateRoute>,
       },
       {
-        path: '/checkout',
-        element: (
-          <ProtectedRoute>
-            <Checkout />
-          </ProtectedRoute>
-        ),
+        path: "/checkout",
+        element: <PrivateRoute><Checkout /></PrivateRoute>,
       },
       {
-        path: '/orders',
-        element: (
-          <ProtectedRoute>
-            <Orders />
-          </ProtectedRoute>
-        ),
+        path: "/order",
+        element: <PrivateRoute><Order /></PrivateRoute>,
       },
     ],
   },
