@@ -89,49 +89,63 @@ export const router = createBrowserRouter([
 
   // User Routes - Public but some pages require authentication
   {
+    element: <UserLayout />, // or PublicLayout if you want separate UI
+    errorElement: <ErrorBoundary />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/productlist", element: <ProductList /> },
+      { path: "/product/:id", element: <ProductDetail /> },
+      { path: "/about", element: <About /> },
+      { path: "/contact", element: <Contact /> },
+      { path: "/testimonials", element: <Testimonials /> },
+    ],
+  }
+,  
+  {
     element: <UserLayout />,
     errorElement: <ErrorBoundary />,
     children: [
-      {
-        path: "/",
-        element: (
-          <PrivateRoute>
-            <Home />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/order-details",
-        element: (
-          <PrivateRoute>
-            <OrderDetails />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/dashboard",
-        element: (
-          <PrivateRoute>
-            <OrderDetails />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/productlist",
-        element: (
-          <PrivateRoute>
-            <ProductList />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/product/:id",
-        element: (
-          <PrivateRoute>
-            <ProductDetail />
-          </PrivateRoute>
-        ),
-      },
+    //   {
+    //     path: "/",
+    //     element: (
+    //       <PrivateRoute>
+    //         <Home />
+    //       </PrivateRoute> 
+    //     ),
+    //   },
+    //   {
+    //     path: "/order-details",
+    //     element: (
+    //       <PrivateRoute>
+    //         <OrderDetails />
+    //       </PrivateRoute>
+    //     ),
+    //   },
+    //   {
+    //     path: "/dashboard",
+    //     element: (
+    //       <PrivateRoute>
+    //         <OrderDetails />
+    //       </PrivateRoute>
+    //     ),
+    //   },
+    //   {
+    //     path: "/productlist",
+    //     element: (
+    //       <PrivateRoute>
+    //         <ProductList />
+    //       </PrivateRoute>
+    //     ),
+    //   },
+    //   {
+    //     path: "/product/:id",
+    //     element: (
+    //       <PrivateRoute>
+    //         <ProductDetail />
+    //       </PrivateRoute>
+    //     ),
+    //   },
+
       {
         path: "/cart",
         element: (
@@ -156,30 +170,30 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "/testimonials",
-        element: (
-          <PrivateRoute>
-            <Testimonials />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/contact",
-        element: (
-          <PrivateRoute>
-            <Contact />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/about",
-        element: (
-          <PrivateRoute>
-            <About />
-          </PrivateRoute>
-        ),
-      },
+      // {
+      //   path: "/testimonials",
+      //   element: (
+      //     <PrivateRoute>
+      //       <Testimonials />
+      //     </PrivateRoute>
+      //   ),
+      // },
+      // {
+      //   path: "/contact",
+      //   element: (
+      //     <PrivateRoute>
+      //       <Contact />
+      //     </PrivateRoute>
+      //   ),
+      // },
+      // {
+      //   path: "/about",
+      //   element: (
+      //     <PrivateRoute>
+      //       <About />
+      //     </PrivateRoute>
+      //   ),
+      // },
     ],
   },
   // Catch-all route for 404

@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 
 import { Link } from "react-router-dom";
 import Signin from "./components/Signin";
-
+import Home from "./pages/clinetPages/Home"
 import { UserAuth } from "./context/AuthContext";
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
 
   return (
     <>
-      <Signin />
+      <Home />
     </>
   );
 }
