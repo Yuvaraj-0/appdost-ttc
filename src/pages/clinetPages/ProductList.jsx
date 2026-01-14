@@ -126,7 +126,7 @@ export default function ProductList() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section with Animation */}
-      <div className="bg-gradient-to-r from-primary-600 via-primary-700 to-indigo-700 text-white py-16 px-6 relative overflow-hidden">
+      <div className="bg-blue-400">
         <div className="absolute inset-0 bg-black opacity-10"></div>
         <div className="absolute top-0 right-0 w-96 h-96 bg-white opacity-5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
         <div className="absolute bottom-0 left-0 w-72 h-72 bg-white opacity-5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
